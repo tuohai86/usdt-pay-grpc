@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package order;
+
+option go_package = "usdt-pay-grpc/proto/order";
+
+service UsdtPayService {
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+}
+
+message CreateOrderRequest {
+  string amount = 1; // 原始金额，字符串避免精度问题
+}
+
+message CreateOrderResponse {
+  string order_no = 1;        // 订单号 YYYYMMDDHHmmss + 4位随机数
+  string actual_amount = 2;   // 实际支付金额
+  string original_amount = 3; // 原始金额
+  string wallet_address = 4;  // USDT 收款地址
+}
