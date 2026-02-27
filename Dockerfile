@@ -9,5 +9,6 @@ ENV CGO_ENABLED=0
 
 RUN go build -o ./bin/server ./cmd/server/
 FROM alpine AS runtime
+RUN apk add --no-cache tzdata
 COPY --from=builder /src/bin/server /bin/server
 CMD ["/bin/server"]
